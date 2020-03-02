@@ -14,12 +14,83 @@
 		<param-value>admin</param-value>
 	</context-param>
 	
+	
 	<servlet>
 	<servlet-name>Login</servlet-name>
-	<servlet-class>Servlet.login</servlet-class>	
+	<servlet-class>Servlet.Login</servlet-class>	
 	</servlet>
 	<servlet-mapping>
 	<servlet-name>Login</servlet-name>
 	<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	
+	<servlet>
+	<servlet-name>AdminPage</servlet-name>
+	<jsp-file>/WEB-INF/jsp/admin/admin.jsp</jsp-file>	
+	</servlet>
+	<servlet-mapping>
+	<servlet-name>AdminPage</servlet-name>
+	<url-pattern>/admin/home</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+	<servlet-name>DisplayDate</servlet-name>
+	<jsp-file>/WEB-INF/jsp/utente/displayDate.jsp</jsp-file>	
+	</servlet>
+	<servlet-mapping>
+	<servlet-name>DisplayDate</servlet-name>
+	<url-pattern>/utente/displayDate</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+	<servlet-name>CategorieDisp</servlet-name>
+	<jsp-file>/WEB-INF/jsp/utente/categorie.jsp</jsp-file>	
+	</servlet>
+	<servlet-mapping>
+	<servlet-name>CategorieDisp</servlet-name>
+	<url-pattern>/utente/categorie</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+	<servlet-name>VeicoliDisp</servlet-name>
+	<jsp-file>/WEB-INF/jsp/utente/veicoli.jsp</jsp-file>	
+	</servlet>
+	<servlet-mapping>
+	<servlet-name>VeicoliDisp</servlet-name>
+	<url-pattern>/utente/veicoliDisp</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+	<servlet-name>StartNoleggio</servlet-name>
+	<jsp-file>/WEB-INF/jsp/utente/startNoleggio.jsp</jsp-file>	
+	</servlet>
+	<servlet-mapping>
+	<servlet-name>StartNoleggio</servlet-name>
+	<url-pattern>/utente/startNoleggio</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	<filter>
+	<filter-name>UtenteFilter</filter-name>
+	<filter-class>filter.UtenteFilter</filter-class>
+	</filter>
+	<filter-mapping>
+	<filter-name>UtenteFilter</filter-name>
+	<url-pattern>/utente/*</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+	<filter-name>AdminFilter</filter-name>
+	<filter-class>filter.AdminFilter</filter-class>
+	</filter>
+	<filter-mapping>
+	<filter-name>AdminFilter</filter-name>
+	<url-pattern>/admin/*</url-pattern>
+	</filter-mapping>
 </web-app>
