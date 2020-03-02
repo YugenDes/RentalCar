@@ -45,7 +45,7 @@ public class JpaDAOFactory extends DAOFactory {
 			e.printStackTrace();
 		}
 		EntityManagerFactory factory = 
-				Persistence.createEntityManagerFactory("Autonoleggio");
+				Persistence.createEntityManagerFactory("RentalCar");
 		EntityManager manager = factory.createEntityManager();
 		return manager;
 	}
