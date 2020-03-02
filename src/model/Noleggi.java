@@ -1,6 +1,9 @@
 package model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.Period;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -20,23 +23,30 @@ public class Noleggi implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fineNoleggio;
 
-	private float importoDovuto;
+	private double importoDovuto;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date inizioNoleggio;
 
 	//bi-directional many-to-one association to Veicoli
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="targa")
 	private Veicoli veicoli;
 
 	//bi-directional many-to-one association to Utente
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="idUtente")
 	private Utente utente;
 
 	public Noleggi() {
 	}
+	
+	public Noleggi(Veicoli veicoli, Date dataInizio, Utente utente) {
+		this.veicoli = veicoli;
+		this.inizioNoleggio = dataInizio;
+		this.utente = utente;
+	}
+	
 
 	public int getIdNoleggio() {
 		return this.idNoleggio;
@@ -54,11 +64,11 @@ public class Noleggi implements Serializable {
 		this.fineNoleggio = fineNoleggio;
 	}
 
-	public float getImportoDovuto() {
+	public double getImportoDovuto() {
 		return this.importoDovuto;
 	}
 
-	public void setImportoDovuto(float importoDovuto) {
+	public void setImportoDovuto(double importoDovuto) {
 		this.importoDovuto = importoDovuto;
 	}
 
@@ -85,5 +95,21 @@ public class Noleggi implements Serializable {
 	public void setUtente(Utente utente) {
 		this.utente = utente;
 	}
+	
+	public static double calcolaImportoDovuto(LocalDate inizio , LocalDate fine , Categorie c) {
+		double importo = 0;
+		Period p = Period.between(inizio, fine);
+		importo = (p.getMonths()*c.getTariffaMensile()) + (((int)p.getDays()/7)*c.getTariffaMensile()) + (p.getDays()%7*c.getTariffaGiornaliera());
+		return importo;
+	}
 
+	@Override
+	public String toString() {
+		return "Noleggi [idNoleggio=" + idNoleggio + ", fineNoleggio=" + fineNoleggio + ", importoDovuto="
+				+ importoDovuto + ", inizioNoleggio=" + inizioNoleggio + ", veicoli=" + veicoli + ", utente=" + utente
+				+ "]";
+	}
+
+	
+	
 }

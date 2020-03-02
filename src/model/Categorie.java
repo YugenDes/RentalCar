@@ -4,6 +4,11 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
+
+/**
+ * The persistent class for the categorie database table.
+ * 
+ */
 @Entity
 @NamedQuery(name="Categorie.findAll", query="SELECT c FROM Categorie c")
 public class Categorie implements Serializable {
@@ -14,19 +19,26 @@ public class Categorie implements Serializable {
 
 	private String nomeCategoria;
 
-	private float tariffaGiornaliera;
+	private double tariffaGiornaliera;
 
-	private float tariffaMensile;
+	private double tariffaMensile;
 
-	private float tariffaSettimanale;
+	private double tariffaSettimanale;
 
 	//bi-directional many-to-one association to Veicoli
-	@OneToMany(mappedBy="categorie", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="categorie")
 	private List<Veicoli> veicolis;
 
 	public Categorie() {
 	}
-
+	
+	public Categorie(String nomeCategoria, double tariffaGiornaliera, double tariffaSettimanale, double tariffaMensile) {
+		this.nomeCategoria = nomeCategoria;
+		this.tariffaGiornaliera = tariffaGiornaliera;
+		this.tariffaMensile = tariffaMensile;
+		this.tariffaSettimanale = tariffaSettimanale;
+	}
+	
 	public int getIdCategoria() {
 		return this.idCategoria;
 	}
@@ -43,27 +55,27 @@ public class Categorie implements Serializable {
 		this.nomeCategoria = nomeCategoria;
 	}
 
-	public float getTariffaGiornaliera() {
+	public double getTariffaGiornaliera() {
 		return this.tariffaGiornaliera;
 	}
 
-	public void setTariffaGiornaliera(float tariffaGiornaliera) {
+	public void setTariffaGiornaliera(double tariffaGiornaliera) {
 		this.tariffaGiornaliera = tariffaGiornaliera;
 	}
 
-	public float getTariffaMensile() {
+	public double getTariffaMensile() {
 		return this.tariffaMensile;
 	}
 
-	public void setTariffaMensile(float tariffaMensile) {
+	public void setTariffaMensile(double tariffaMensile) {
 		this.tariffaMensile = tariffaMensile;
 	}
 
-	public float getTariffaSettimanale() {
+	public double getTariffaSettimanale() {
 		return this.tariffaSettimanale;
 	}
 
-	public void setTariffaSettimanale(float tariffaSettimanale) {
+	public void setTariffaSettimanale(double tariffaSettimanale) {
 		this.tariffaSettimanale = tariffaSettimanale;
 	}
 

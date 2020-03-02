@@ -17,7 +17,7 @@ public class Veicoli implements Serializable {
 	@Id
 	private String targa;
 
-	private float capacitaBagagliaio;
+	private double capacitaBagagliaio;
 
 	private String colore;
 
@@ -27,19 +27,31 @@ public class Veicoli implements Serializable {
 
 	private int nPosti;
 
-	private byte prenotata;
+	private boolean prenotata;
 
 	//bi-directional many-to-one association to Noleggi
-	@OneToMany(mappedBy="veicoli", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="veicoli")
 	private List<Noleggi> noleggis;
 
 	//bi-directional many-to-one association to Categorie
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="idCategoria")
 	private Categorie categorie;
 
 	public Veicoli() {
 	}
+	
+	public Veicoli(String targa, Categorie categoria, String marca, String modello, int nPosti, double capacitaBagagliaio,
+			String colore) {
+		this.targa = targa;
+		this.categorie = categoria;
+		this.marca = marca;
+		this.modello = modello;
+		this.nPosti = nPosti;
+		this.capacitaBagagliaio = capacitaBagagliaio;
+		this.colore = colore;
+	}
+
 
 	public String getTarga() {
 		return this.targa;
@@ -49,11 +61,11 @@ public class Veicoli implements Serializable {
 		this.targa = targa;
 	}
 
-	public float getCapacitaBagagliaio() {
+	public double getCapacitaBagagliaio() {
 		return this.capacitaBagagliaio;
 	}
 
-	public void setCapacitaBagagliaio(float capacitaBagagliaio) {
+	public void setCapacitaBagagliaio(double capacitaBagagliaio) {
 		this.capacitaBagagliaio = capacitaBagagliaio;
 	}
 
@@ -89,11 +101,11 @@ public class Veicoli implements Serializable {
 		this.nPosti = nPosti;
 	}
 
-	public byte getPrenotata() {
+	public boolean getPrenotata() {
 		return this.prenotata;
 	}
 
-	public void setPrenotata(byte prenotata) {
+	public void setPrenotata(boolean prenotata) {
 		this.prenotata = prenotata;
 	}
 

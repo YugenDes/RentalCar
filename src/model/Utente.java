@@ -1,45 +1,55 @@
 package model;
 
 import java.io.Serializable;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+
 import javax.persistence.*;
 import java.util.List;
-
 
 /**
  * The persistent class for the utente database table.
  * 
  */
 @Entity
-@NamedQuery(name="Utente.findAll", query="SELECT u FROM Utente u")
+@NamedQuery(name = "Utente.findAll", query = "SELECT u FROM Utente u")
 public class Utente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	private int idUtente;
+	private String email;
 
 	private String cognome;
 
 	private String dataDiNascita;
 
-	private String email;
+	@Id
+	private int idUtente;
 
 	private String nome;
 
 	private String password;
 
-	//bi-directional many-to-one association to Noleggi
-	@OneToMany(mappedBy="utente", fetch=FetchType.EAGER)
+	// bi-directional many-to-one association to Noleggi
+	@OneToMany(mappedBy = "utente")
 	private List<Noleggi> noleggis;
 
 	public Utente() {
 	}
 
-	public int getIdUtente() {
-		return this.idUtente;
+	public Utente(String tryEmail, String tryPassword, String tryNome, String tryCognome, String tryDate) {
+		this.email = tryEmail;
+		this.password = tryPassword;
+		this.nome = tryNome;
+		this.cognome = tryCognome;
+		this.dataDiNascita = tryDate;
 	}
 
-	public void setIdUtente(int idUtente) {
-		this.idUtente = idUtente;
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getCognome() {
@@ -58,12 +68,12 @@ public class Utente implements Serializable {
 		this.dataDiNascita = dataDiNascita;
 	}
 
-	public String getEmail() {
-		return this.email;
+	public int getIdUtente() {
+		return this.idUtente;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setIdUtente(int idUtente) {
+		this.idUtente = idUtente;
 	}
 
 	public String getNome() {
@@ -102,6 +112,24 @@ public class Utente implements Serializable {
 		noleggi.setUtente(null);
 
 		return noleggi;
+	}
+
+	@Override
+	public String toString() {
+		return "Utente [email=" + email + ", cognome=" + cognome + ", dataDiNascita=" + dataDiNascita + ", idUtente="
+				+ idUtente + ", nome=" + nome + ", password=" + password + "]";
+	}
+
+	public int giorniNoleggio() {
+		int amount = 0;
+		if (noleggis != null) {
+			for (Noleggi noleggio : this.noleggis) {
+				amount += ChronoUnit.DAYS.between(
+						noleggio.getInizioNoleggio().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+						noleggio.getFineNoleggio().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+			}
+		}
+		return amount;
 	}
 
 }
