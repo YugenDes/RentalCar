@@ -13,8 +13,7 @@
 </head>
 <body>
 	<% String errore = (String)request.getAttribute("errore"); %>
-	<% Veicoli param = (Veicoli)request.getAttribute("veicolo"); %>
-	<% String categoria = (String)request.getAttribute("cat"); %>
+	<% Veicoli param = (Veicoli)request.getSession().getAttribute("veicoloDaModificare"); %>
 	<div class="jumbotron">
 		<h1 class="display-4">
 			Modifica Veicolo</h1>
@@ -29,11 +28,13 @@
 		<div class="col">
 		<form action="modifyVeicolo" method="POST">
 			<div class="form-group">
-			<label>Targa</label> <input	type="text" class="form-control" name="regTarga" placeholder="<%=param.getTarga()%>" value="<%=param.getTarga()%>">
+			<label>Targa</label> <input disabled type="text" class="form-control" name="regTarga" placeholder="<%=param.getTarga()%>">
+			<input hidden type="text" class="form-control" name="regTarga" placeholder="<%=param.getTarga()%>" value="<%=param.getTarga()%>">
 			</div>
 			<div class="form-group">
 			<label>Categoria</label> 
-			<input type="text" class="form-control" name="regCategoria" placeholder="<%=categoria%>" value="<%=categoria%>">
+			<input disabled type="text" class="form-control" name="regCategoria" placeholder="<%=param.getCategorie().getNomeCategoria()%>">
+			<input hidden type="text" class="form-control" name="regCategoria" placeholder="<%=param.getCategorie().getNomeCategoria()%>" value="<%=param.getCategorie().getNomeCategoria()%>">
 			</div>
 			<div class="form-group">
 			<label>Marca</label> <input	type="text" class="form-control" name="regMarca" placeholder="<%=param.getMarca()%>" value="<%=param.getMarca()%>">

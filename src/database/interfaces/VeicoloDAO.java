@@ -11,5 +11,6 @@ public interface VeicoloDAO {
 	public abstract ArrayList<Veicoli> getVeicoliPerCategoria(String cat);
 	public abstract boolean addVeicolo(Veicoli obj);
 	public abstract boolean removeVeicolo(Veicoli obj);
+	public abstract boolean modifyVeicolo(Veicoli obj);
 
 }

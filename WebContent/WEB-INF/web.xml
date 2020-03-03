@@ -58,7 +58,7 @@
 	</servlet>
 	<servlet-mapping>
 	<servlet-name>ModifyVeicolo</servlet-name>
-	<url-pattern>/utente/ModifyVeicolo</url-pattern>
+	<url-pattern>/admin/ModifyVeicolo</url-pattern>
 	</servlet-mapping>
 	
 	

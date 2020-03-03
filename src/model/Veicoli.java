@@ -2,7 +2,11 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -137,6 +141,33 @@ public class Veicoli implements Serializable {
 
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
+	}
+	
+	public Map<String, Object> hasChanges(Veicoli newest){
+		Map<String, Object> map = new HashMap<>();
+		if(!this.targa.equals(newest.targa)) {
+			map.put("targa", newest.targa);
+		}
+		if(!(this.categorie==newest.categorie)) {
+			map.put("Categorie", newest.categorie);
+		}
+		if(!this.marca.equals(newest.marca)) {
+			map.put("Marca", newest.marca);
+		}
+		if(!this.modello.equals(newest.modello)) {
+			map.put("Modello", newest.modello);
+		}
+		if(this.nPosti!=newest.nPosti) {
+			map.put("nPosti", newest.nPosti);
+		}
+		if(this.capacitaBagagliaio!=newest.capacitaBagagliaio) {
+			map.put("capacitaBagagliaio", newest.capacitaBagagliaio);
+		}
+		if(!this.colore.equals(newest.colore)) {
+			map.put("colore", newest.colore);
+		}	
+		return map.keySet()==null ?  map :  null;
+		
 	}
 
 }

@@ -116,11 +116,9 @@
 		  		if(veicolo==null) break;%>
 			  <tr>
 		      <th scope="row"> </th>
-		      <td><form action="modifyVeicolo" method="POST">
-		      <input type="text" hidden  name="where" value="fromadmin">
-		      <input type="text" hidden class="form-control" name="targa"value="<%=veicolo.getTarga()%>">
-		      <button type="submit" class="btn btn-link"><%=veicolo.getTarga()%></button>
-		       </form></td>
+		      <td>
+		      <a href="modifyVeicolo?targa=<%=veicolo.getTarga()%>"><%=veicolo.getTarga()%></a>
+		      </td>
 		      <td><%=veicolo.getCategorie().getIdCategoria()%></td>
 		      <td><form action="removeVeicolo" method="POST">
 		      <input type="text" hidden  name="targa" value="<%=veicolo.getTarga()%>">

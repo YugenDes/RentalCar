@@ -1,10 +1,13 @@
 package database.jpadao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+
+import org.apache.catalina.tribes.group.interceptors.TwoPhaseCommitInterceptor.MapEntry;
 
 import database.interfaces.VeicoloDAO;
 import model.Veicoli;
@@ -53,6 +56,17 @@ public class JpaVeicoloDAO implements VeicoloDAO{
 		transaction.commit();
 		return true;
 	}
+
+	@Override
+	public boolean modifyVeicolo(Veicoli obj) {
+		EntityManager manager = JpaDAOFactory.getManager();
+		EntityTransaction transaction = manager.getTransaction();
+		transaction.begin();	   
+		manager.merge(obj);
+		transaction.commit();
+		return true;
+	}
+	
 
 	private static JpaVeicoloDAO istance;
 	
