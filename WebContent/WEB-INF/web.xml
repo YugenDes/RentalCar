@@ -34,6 +34,33 @@
 	<url-pattern>/admin/home</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+	<servlet-name>AddCategoria</servlet-name>
+	<jsp-file>/WEB-INF/jsp/admin/addCategoria.jsp</jsp-file>	
+	</servlet>
+	<servlet-mapping>
+	<servlet-name>AddCategoria</servlet-name>
+	<url-pattern>/admin/AddCategoria</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+	<servlet-name>AddVeicolo</servlet-name>
+	<jsp-file>/WEB-INF/jsp/admin/addVeicolo.jsp</jsp-file>	
+	</servlet>
+	<servlet-mapping>
+	<servlet-name>AddVeicolo</servlet-name>
+	<url-pattern>/admin/AddVeicolo</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+	<servlet-name>ModifyVeicolo</servlet-name>
+	<jsp-file>/WEB-INF/jsp/admin/modifyVeicolo.jsp</jsp-file>	
+	</servlet>
+	<servlet-mapping>
+	<servlet-name>ModifyVeicolo</servlet-name>
+	<url-pattern>/utente/ModifyVeicolo</url-pattern>
+	</servlet-mapping>
+	
 	
 	<servlet>
 	<servlet-name>DisplayDate</servlet-name>
@@ -72,9 +99,7 @@
 	<servlet-mapping>
 	<servlet-name>StartNoleggio</servlet-name>
 	<url-pattern>/utente/startNoleggio</url-pattern>
-	</servlet-mapping>
-	
-	
+	</servlet-mapping>	
 	
 	<filter>
 	<filter-name>UtenteFilter</filter-name>

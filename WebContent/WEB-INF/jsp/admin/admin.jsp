@@ -134,7 +134,7 @@
 </table>
 <small class="form-text text-muted">Per aggiungere un veicolo cliccare sulla categoria desiderata</small>
   <div class="row">
-<div class="mb-3 mt-3 mr-3 ml-3"><a class="btn btn-primary btn-lg" href="addCategoria" role="button">Aggiungi Categoria</a></div>
+<div class="mb-3 mt-3 mr-3 ml-3"><a class="btn btn-primary btn-lg" href="AddCategoria" role="button">Aggiungi Categoria</a></div>
   </div>
 
 <table class="table">
