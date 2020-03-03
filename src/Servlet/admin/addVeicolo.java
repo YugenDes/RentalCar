@@ -28,7 +28,7 @@ public class addVeicolo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cat = request.getParameter("cat");
 		request.setAttribute("cat", cat);
-		request.getRequestDispatcher("/WEB-INF/jsp/addVeicolo.jsp").forward(request, response);
+		request.getRequestDispatcher("/admin/AddVeicolo").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,12 +44,12 @@ public class addVeicolo extends HttpServlet {
 		int capBag=0;
 		if(!tryTarga.matches("[A-Z]{2}[0-9]{3}[A-Z]{2}")) {
 			request.setAttribute("errore", "1");
-			request.getRequestDispatcher("/WEB-INF/jsp/addVeicolo.jsp").forward(request, response);
+			request.getRequestDispatcher("/admin/AddVeicolo").forward(request, response);
 			return;
 		}
 		if(check(tryTarga)) {
 			request.setAttribute("errore", "3");
-			request.getRequestDispatcher("/WEB-INF/jsp/addVeicolo.jsp").forward(request, response);
+			request.getRequestDispatcher("/admin/AddVeicolo").forward(request, response);
 			return ;
 		}
 		try {
@@ -57,7 +57,7 @@ public class addVeicolo extends HttpServlet {
 			 capBag = Integer.parseInt(tryCapBag);
 		} catch (Exception e) {
 			request.setAttribute("errore", "2");
-			request.getRequestDispatcher("/WEB-INF/jsp/addVeicolo.jsp").forward(request, response);
+			request.getRequestDispatcher("/admin/AddVeicolo").forward(request, response);
 			return;
 		}
 		Categorie tryCat = new Categorie(); 
@@ -76,10 +76,10 @@ public class addVeicolo extends HttpServlet {
 		tryVeicolo.setCapacitaBagagliaio(capBag);
 		tryVeicolo.setColore(tryColore);
 		db.getVeicoloDAO().addVeicolo(tryVeicolo);
-		request.setAttribute("utenti", db.getUtenteDAO().getUtenti());
-		request.setAttribute("veicoli", db.getVeicoloDAO().getVeicoli());
-		request.setAttribute("categorie", db.getCategoriaDAO().getCategorie());
-		request.getRequestDispatcher("/WEB-INF/jsp/admin.jsp").forward(request, response);
+		request.getSession().setAttribute("utenti", db.getUtenteDAO().getUtenti());
+		request.getSession().setAttribute("veicoli", db.getVeicoloDAO().getVeicoli());
+		request.getSession().setAttribute("categorie", db.getCategoriaDAO().getCategorie());
+		request.getRequestDispatcher("/admin/home").forward(request, response);
 		
 	}
 	
